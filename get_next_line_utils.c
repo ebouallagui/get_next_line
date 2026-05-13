@@ -6,7 +6,7 @@
 /*   By: eboualla <eboualla@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:33:05 by eboualla          #+#    #+#             */
-/*   Updated: 2026/05/12 20:59:10 by eboualla         ###   ########.fr       */
+/*   Updated: 2026/05/13 14:44:47 by eboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -34,4 +34,19 @@ char	*ft_memcpy(char *dest, char *src, size_t n)
 		*d++ = *s++;
 	*d = '\0';
 	return (dest);
+}
+
+int read_to_nl(int fd, char *buf, int bufsize)
+{
+	int i = 0;
+	int bytes_read = 0;
+	int is_eol = 0;
+	while (i < bufsize)
+	{
+		bytes_read += read(fd, buf[i], 1);
+		if (buf[i] == '\n')
+			return (bytes_read);
+		i++;
+	}
+	return (bytes_read);
 }

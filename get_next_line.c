@@ -6,7 +6,7 @@
 /*   By: eboualla <eboualla@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:24:57 by eboualla          #+#    #+#             */
-/*   Updated: 2026/05/12 20:57:01 by eboualla         ###   ########.fr       */
+/*   Updated: 2026/05/13 14:44:45 by eboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -18,15 +18,19 @@ char	*get_next_line(int fd)
 	size_t	line_len;
 	int		bytes_read;
 
-	bytes_read = read(fd, buf, sizeof(buf));
+	bytes_read = read_to_nl(fd, buf, sizeof(buf));
 	if (bytes_read == -1)
 		return (NULL);
-	buf[bytes_read] = '\0';
-	line_len = line_size(buf);
-	current_line = malloc(line_len + 1);
-	if (!current_line)
-		return (NULL);
-	current_line = ft_memcpy(current_line, buf, line_len);
+	if (bytes_read <= sizeof(buf))
+	{
+		current_line = malloc(bytes_read + 2);
+		if (!current_line)
+			return (NULL);
+		buf[bytes_read] = '\n';
+		buf[bytes_read + 1] = '\0';
+		current_line = ft_memcpy(current_line, buf, bytes_read);
+	}
+	else
 	return (current_line);
 }
 

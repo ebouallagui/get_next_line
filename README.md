@@ -11,14 +11,11 @@
 
 ### Compilation
 
-To compile the library, run:
+To compile the function, run:
 
 ```bash
 
-make        # builds the library
-make clean  # removes object files
-make fclean # removes object files and the library
-make re     # fully rebuilds the project
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=n <files>.c
 
 ```
 ---
@@ -27,7 +24,7 @@ make re     # fully rebuilds the project
 read man page  
 https://de.wikipedia.org/wiki/Static_(Schl%C3%BCsselwort)  
 https://pubs.opengroup.org/onlinepubs/009604599/functions/read.html#:~:text=The%20read()%20function%20reads,return%20bytes%20with%20value%200.  
-
+https://www.geeksforgeeks.org/c/static-variables-in-c/  
 
 ### AI Usage
 
