@@ -6,32 +6,37 @@
 /*   By: eboualla <eboualla@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:24:57 by eboualla          #+#    #+#             */
-/*   Updated: 2026/05/13 14:44:45 by eboualla         ###   ########.fr       */
+/*   Updated: 2026/05/14 17:04:45 by eboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
+#define BUFFER_SIZE
 
 char	*get_next_line(int fd)
 {
-	char	*current_line;
-	char	buf[20];
-	size_t	line_len;
-	int		bytes_read;
+	char		buf[BUFFER_SIZE + 1];
+	char		*line;
+	static char	*stash;
+	char		*new_stash;
+	int			bytes_read;
 
-	bytes_read = read_to_nl(fd, buf, sizeof(buf));
-	if (bytes_read == -1)
-		return (NULL);
-	if (bytes_read <= sizeof(buf))
+	while (!ft_strchr(stash, '\n'))
 	{
-		current_line = malloc(bytes_read + 2);
-		if (!current_line)
+		bytes_read = read(fd, buf, BUFFER_SIZE);
+		if (bytes_read == -1)
 			return (NULL);
-		buf[bytes_read] = '\n';
-		buf[bytes_read + 1] = '\0';
-		current_line = ft_memcpy(current_line, buf, bytes_read);
+		new_stash = malloc(sizeof(buf) + sizeof(stash) + 1);
+		if (!new_stash)
+			return (NULL);
+		new_stash = ft_memcpy(new_stash, buf);
+		new_stash = ft_strlcat(new_stash, buf);// add '\0'!!
+		free(stash);
+		stash = new_stash;
 	}
-	else
-	return (current_line);
+	line = ft_cutword(line, stash, i);
+	line[ft_strlen(line)] = '\n';
+	stash = stash[ft_strlen(line)];
+	return (line);
 }
 
 #include <fcntl.h>

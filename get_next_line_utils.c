@@ -6,19 +6,19 @@
 /*   By: eboualla <eboualla@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:33:05 by eboualla          #+#    #+#             */
-/*   Updated: 2026/05/13 14:44:47 by eboualla         ###   ########.fr       */
+/*   Updated: 2026/05/14 17:04:51 by eboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
 
-size_t	line_size(char *str)
+size_t	ft_strlen(char *str)
 {
 	size_t	i;
 
 	i = 0;
 	if (!str)
 		return (0);
-	while (str[i] != '\n' && str[i])
+	while (str[i])
 		i++;
 	return (i);
 }
