@@ -6,7 +6,11 @@
 /*   By: eboualla <eboualla@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:24:57 by eboualla          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/05/14 17:04:45 by eboualla         ###   ########.fr       */
+=======
+/*   Updated: 2026/05/13 15:35:40 by eboualla         ###   ########.fr       */
+>>>>>>> 8047b670e423e5be5f908e1ab38f267a302f8b7e
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -33,10 +37,15 @@ char	*get_next_line(int fd)
 		free(stash);
 		stash = new_stash;
 	}
+<<<<<<< HEAD
 	line = ft_cutword(line, stash, i);
 	line[ft_strlen(line)] = '\n';
 	stash = stash[ft_strlen(line)];
 	return (line);
+=======
+	else
+		return (current_line);
+>>>>>>> 8047b670e423e5be5f908e1ab38f267a302f8b7e
 }
 
 #include <fcntl.h>
@@ -49,6 +58,13 @@ int	main(void)
 	fd = open("test.txt", O_RDONLY);
 	if (fd == -1)
 		exit(1);
-	printf("next line:\n%s\n", get_next_line(fd));
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+		{
+			return (67);
+		}
+	}
 	close(fd);
 }
