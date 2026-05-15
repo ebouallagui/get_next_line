@@ -6,7 +6,7 @@
 /*   By: eboualla <eboualla@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:33:05 by eboualla          #+#    #+#             */
-/*   Updated: 2026/05/15 12:20:49 by eboualla         ###   ########.fr       */
+/*   Updated: 2026/05/15 13:01:34 by eboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -65,35 +65,23 @@ int ft_strchr(const char *s, char c)
 	return (0);
 }
 
-char	*ft_cutline(char *dest, char *src, char c)
+char	*ft_cutline(char *line, char *stash, char c)
 {
 	size_t	len;
+	int i;
 
-	len = 0;
-	while (s[len] && s[len] != c)
-		len++;
-	dest = malloc(len + 1);
-	if (!dest)
-		return (NULL);
-	ft_strlcpy(dest, src, len + 1);
-	return (dest);
-}
-
-size_t	ft_strlcpy(char *dest, char *src, size_t size)
-{
-	size_t	i;
-	size_t	len;
-
-	len = ft_strlen(src);
 	i = 0;
-	if (size == 0)
-		return (len);
-	while (i < (size - 1) && src[i])
+	len = 0;
+	while (stash[len] && stash[len] != c)
+		len++;
+	line = malloc(len + 1);
+	if (!line)
+		return (NULL);
+	while (i < len)
 	{
-		dest[i] = src[i];
+		line[i] = stash[i];
 		i++;
 	}
-	dest[i] = '\n';
-	return (len);
+	line[i] = '\n';
+	return (line);
 }
-
