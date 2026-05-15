@@ -6,10 +6,11 @@
 /*   By: eboualla <eboualla@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:24:57 by eboualla          #+#    #+#             */
-/*   Updated: 2026/05/13 14:44:45 by eboualla         ###   ########.fr       */
+/*   Updated: 2026/05/13 15:35:40 by eboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
+#define BUFFER_SIZE
 
 char	*get_next_line(int fd)
 {
@@ -31,7 +32,7 @@ char	*get_next_line(int fd)
 		current_line = ft_memcpy(current_line, buf, bytes_read);
 	}
 	else
-	return (current_line);
+		return (current_line);
 }
 
 #include <fcntl.h>
@@ -44,6 +45,13 @@ int	main(void)
 	fd = open("test.txt", O_RDONLY);
 	if (fd == -1)
 		exit(1);
-	printf("next line:\n%s\n", get_next_line(fd));
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+		{
+			return (67);
+		}
+	}
 	close(fd);
 }
