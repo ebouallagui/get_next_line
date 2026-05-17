@@ -6,7 +6,7 @@
 /*   By: eboualla <eboualla@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:33:05 by eboualla          #+#    #+#             */
-/*   Updated: 2026/05/15 13:01:34 by eboualla         ###   ########.fr       */
+/*   Updated: 2026/05/17 22:35:19 by eboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -36,52 +36,57 @@ char	*ft_memcpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-char	*ft_strlcat(char *dest, char *src, int bytes_read)
+char	*ft_strchr(const char *s, int c)
 {
-	int	i;
-	int	destlen;
+	char	ch;
 
-	i = 0;
-	destlen = 0;
-	while (dest[destlen])
-		destlen++;
-	while (src[i] && i < bytes_read)
+	ch = (char)c;
+	while (*s)
 	{
-		dest[i + destlen] = src[i];
-		i++;
+		if (*s == ch)
+			return ((char *)s);
+		s++;
 	}
-	dest[i + destlen] = '\0';
+	if (ch == '\0')
+		return ((char *)s);
+	return (NULL);
+}
+
+char	*ft_strjoin(const char *s1, const char *s2)
+{
+	char	*dest;
+	size_t	len1;
+	size_t	len2;
+
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	dest = malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!dest)
+		return (NULL);
+	ft_memcpy(dest, s1, len1);
+	ft_memcpy(dest + len1, s2, len2);
+	dest[len1 + len2] = '\0';
 	return (dest);
 }
 
-int ft_strchr(const char *s, char c)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	while (*s)
-	{
-		if (*s == c)
-			return (1);
-		s++;
-	}
-	return (0);
-}
+	size_t	strlen;
+	char	*dest;
 
-char	*ft_cutline(char *line, char *stash, char c)
-{
-	size_t	len;
-	int i;
-
-	i = 0;
-	len = 0;
-	while (stash[len] && stash[len] != c)
-		len++;
-	line = malloc(len + 1);
-	if (!line)
+	if (!s)
 		return (NULL);
-	while (i < len)
-	{
-		line[i] = stash[i];
-		i++;
-	}
-	line[i] = '\n';
-	return (line);
+	strlen = ft_strlen(s);
+	if (start >= strlen)
+		return (ft_strdup(""));
+	if (len > strlen - start)
+		len = strlen - start;
+	dest = malloc(sizeof(char) * (len + 1));
+	if (!dest)
+		return (NULL);
+	ft_memcpy(dest, s + start, len);
+	dest[len] = '\0';
+	return (dest);
 }
