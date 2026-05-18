@@ -6,7 +6,7 @@
 /*   By: eboualla <eboualla@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:33:05 by eboualla          #+#    #+#             */
-/*   Updated: 2026/05/17 22:35:19 by eboualla         ###   ########.fr       */
+/*   Updated: 2026/05/18 13:57:46 by eboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -21,7 +21,7 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_memcpy(char *dest, char *src, unsigned int n)
+char	*ft_memcpy(char *dest, char *src, size_t n)
 {
 	char	*d;
 	char	*s;
@@ -36,7 +36,7 @@ char	*ft_memcpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	char	ch;
 
@@ -52,7 +52,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*dest;
 	size_t	len1;
@@ -71,7 +71,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (dest);
 }
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	size_t	strlen;
 	char	*dest;
@@ -80,7 +80,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 		return (NULL);
 	strlen = ft_strlen(s);
 	if (start >= strlen)
-		return (ft_strdup(""));
+		return (malloc(1));
 	if (len > strlen - start)
 		len = strlen - start;
 	dest = malloc(sizeof(char) * (len + 1));

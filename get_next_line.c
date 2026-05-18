@@ -6,7 +6,7 @@
 /*   By: eboualla <eboualla@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:24:57 by eboualla          #+#    #+#             */
-/*   Updated: 2026/05/17 22:42:55 by eboualla         ###   ########.fr       */
+/*   Updated: 2026/05/18 14:03:58 by eboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -27,7 +27,7 @@ char	*read_to_stash(int fd, char *stash)
 		else if (bytes_read == 0)
 			return (stash);
 		buf[bytes_read] = '\0';
-		ft_strjoin(stash, buf, bytes_read);
+		ft_strjoin(stash, buf);
 	}
 	return (stash);
 }
@@ -77,13 +77,14 @@ char	*get_next_line(int fd)
 	free(new_stash);
 	return (line);
 }
-/*
+
 #include <fcntl.h>
 #include <stdio.h>
 
 int	main(void)
 {
 	int	fd;
+	char *line;
 
 	fd = open("test.txt", O_RDONLY);
 	if (fd == -1)
@@ -93,9 +94,10 @@ int	main(void)
 		line = get_next_line(fd);
 		if (!line)
 		{
-			return (67);
+			return (1);
 		}
+		printf("%s", line);
 	}
 	close(fd);
 }
-*/
+
